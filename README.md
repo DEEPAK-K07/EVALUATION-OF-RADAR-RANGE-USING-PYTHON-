@@ -25,7 +25,7 @@ transmitter gain, receiver gain, radar frequency, radar cross section, and minim
 6. Execute the Program: Run the Python script to calculate and display the maximum range of the radar.
 
 
-   ___Algorithm__:
+__Algorithm__:
 
    Start the program.
 
@@ -58,7 +58,7 @@ Display the final calculated maximum range as output.
 End the program.
 
 
-  __Program__:
+ __Program__:
 
   ```
 import numpy as np
@@ -111,7 +111,7 @@ plt.show()
 
 ```
 
-   __Output__:
+__Output__:
    
 <img width="862" height="470" alt="download" src="https://github.com/user-attachments/assets/f0ae15ae-61a8-4aa9-8701-95e1f863f900" />
 
@@ -121,7 +121,7 @@ plt.show()
 
 <img width="862" height="470" alt="download (1)" src="https://github.com/user-attachments/assets/a53e0152-e372-49c0-b6f6-35e522db9a5a" />
 
-   __Result__:
+__Result__:
    
 The maximum range of the radar system was successfully calculated using Python. By providing the required radar parameters and executing the radar range function, the program produced the correct maximum detectable range value. Thus, the radar range evaluation using Python was completed and verified.
 
