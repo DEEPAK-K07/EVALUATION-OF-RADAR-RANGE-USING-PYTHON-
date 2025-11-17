@@ -60,7 +60,7 @@ End the program.
 
  __Program__:
 
-  ```
+  ```c
 import numpy as np
 import matplotlib.pyplot as plt
 
