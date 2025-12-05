@@ -64,50 +64,55 @@ End the program.
 import numpy as np
 import matplotlib.pyplot as plt
 
-# Radar parameters
-Pt = 1000          # Transmitted power (W)
-G = 40             # Antenna gain (linear)
-lam = 0.05         # Wavelength (m)
-sigma = 10         # RCS (m^2)
-pi4 = (4*np.pi)**3 # (4π)^3 term for radar equation
+# Parameters
+Pt = 1000
+Gt = Gr = 40
+lam = 0.05
+sigma = 10
+Pmin = 1e-13
+pi4 = (4*np.pi)**3
 
+# Radar Range Equation
+Rmax = ((Pt * Gt * Gr * lam**2 * sigma) / (pi4 * Pmin))**0.25
+print("Maximum Radar Range =", Rmax, "meters")
 
-R = np.linspace(1e3, 200e3, 500)   # Range from 1 km to 200 km
-Pr_R = (Pt * G**2 * lam**2 * sigma) / (pi4 * R**4)
+# ----------- Plot 1: Pr vs Range -----------
+R = np.linspace(1e3, 200e3, 500)
+Pr_R = (Pt * Gt * Gr * lam**2 * sigma) / (pi4 * R**4)
 
-plt.figure(figsize=(10,5))
+plt.figure()
 plt.plot(R/1000, 10*np.log10(Pr_R))
 plt.title("Received Power vs Range")
 plt.xlabel("Range (km)")
 plt.ylabel("Pr (dB)")
-plt.grid(True)
+plt.grid()
 
+# ----------- Plot 2: Pr vs Pt -----------
+Pt_vals = np.linspace(100, 10000, 500)
+Rfix = 50e3
+Pr_Pt = (Pt_vals * Gt * Gr * lam**2 * sigma) / (pi4 * Rfix**4)
 
-Pt_values = np.linspace(100, 10000, 500)
-R_fixed = 50e3  # 50 km fixed range
-Pr_Pt = (Pt_values * G**2 * lam**2 * sigma) / (pi4 * R_fixed**4)
-
-plt.figure(figsize=(10,5))
-plt.plot(Pt_values, 10*np.log10(Pr_Pt))
+plt.figure()
+plt.plot(Pt_vals, 10*np.log10(Pr_Pt))
 plt.title("Received Power vs Transmit Power")
 plt.xlabel("Pt (W)")
 plt.ylabel("Pr (dB)")
-plt.grid(True)
+plt.grid()
 
+# ----------- Plot 3: Pr vs Gain -----------
+G_vals = np.linspace(5, 60, 500)
+Pt_fix = 3000
+Pr_G = (Pt_fix * G_vals**2 * lam**2 * sigma) / (pi4 * Rfix**4)
 
-G_values = np.linspace(5, 60, 500)
-Pt_fixed = 3000  # 3 kW transmit power
-Pr_G = (Pt_fixed * G_values**2 * lam**2 * sigma) / (pi4 * R_fixed**4)
-
-plt.figure(figsize=(10,5))
-plt.plot(G_values, 10*np.log10(Pr_G))
+plt.figure()
+plt.plot(G_vals, 10*np.log10(Pr_G))
 plt.title("Received Power vs Antenna Gain")
-plt.xlabel("Antenna Gain (linear)")
+plt.xlabel("Gain (linear)")
 plt.ylabel("Pr (dB)")
-plt.grid(True)
-
+plt.grid()
 
 plt.show()
+
 
 ```
 
